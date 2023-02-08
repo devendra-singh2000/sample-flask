@@ -12,12 +12,12 @@ phases:
     commands:
       - echo Build started on `date`
       - echo Building the Docker image...
-      - docker build -t $REPOSITORY_URI/us-west-2-private-repo:latest .
+      - docker build -t $REPOSITORY_URI/us-west-2-private-repo:$IMAGE_TAG .
   post_build:
     commands:
       - echo Build completed on `date`
       - echo Pushing the Docker images...
-      - docker push $REPOSITORY_URI/us-west-2-private-repo:latest
+      - docker push $REPOSITORY_URI/us-west-2-private-repo:$IMAGE_TAG
       - echo Writing container image definitions file...
       - printf '[{"name":"flask-app","imageUri":"%s"}]' $REPOSITORY_URI/us-west-2-private-repo:$IMAGE_TAG > imagedefinitions.json
 artifacts:
